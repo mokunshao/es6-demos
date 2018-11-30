@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      {
+        //ES3、ES5 数据保护
+        var Person = function() {
+          var data = {
+            name: "es3",
+            sex: "male",
+            age: 15
+          };
+          this.get = function(key) {
+            return data[key];
+          };
+          this.set = function(key, value) {
+            if (key !== "sex") {
+              data[key] = value;
+            }
+          };
+        };
+
+        var person = new Person();
+        console.log(person.get("sex"));
+        person.set("sex", "female");
+        console.log(person.get("sex"));
+        console.log(person.get("name"));
+        person.set("name", "hi");
+        console.log(person.get("name"));
+      }
+      {
+        //ES5
+        var Person = {
+          name: "es5",
+          age: 15
+        };
+        Object.defineProperty(Person, "sex", {
+          writable: false,
+          value: "male"
+        });
+        console.log(Person.sex);
+        Person.sex = "female";
+        console.log(Person.sex);
+      }
+      {
+        //ES6
+        var Person = {
+          name: "es6",
+          sex: "male",
+          age: 15
+        };
+        let person = new Proxy(Person, {
+          get(target, key) {
+            return target[key];
+          },
+          set(target, key, value) {
+            if (key !== "sex") {
+              target[key] = value;
+            }
+          }
+        });
+        console.log(person.sex);
+        person.sex = "female";
+        console.log(person.sex);
+        person.name = "hi";
+        console.log(Person.name);
+        console.log(person.name);
+      }
+    </script>
+  </body>
+</html>
