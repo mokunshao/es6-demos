@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //数组的解构赋值
+      {
+        let arr = [11, 22, 33];
+        let [a, b, c = "default", d = "default"] = arr;
+        console.log(a, b, c, d);
+      }
+      {
+        let arr1 = [11, 22, 33];
+        let [aa, ...bb] = arr1;
+        console.log(aa, bb);
+      }
+
+      //对象的解构赋值
+      {
+        let obj = {
+          a: 1,
+          b: 2
+        };
+        let { a, b } = obj;
+        console.log(a, b);
+      }
+      {
+        let obj = {
+          a: 1,
+          b: 2
+        };
+        let { a, c } = obj;
+        console.log(a, c); //c 会变成 undefined
+      }
+      {
+        let obj = {
+          a: 1,
+          b: 2
+        };
+        let { a: A, b } = obj;
+        console.log(A, b);
+        try {
+          console.log(a);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      {
+        let obj = {
+          arr: ["yo.", { a: 1 }]
+        };
+        let {
+          arr: [greet, { a }]
+        } = obj;
+        console.log(greet, a);
+      }
+      {
+        let { a = 1, b = 2 } = { a: 10 };
+        console.log("a:", a);
+        console.log("b:", b);
+      }
+      {
+        let { a: A = 1, b = 2 } = { a: 10 };
+        console.log("A:", A);
+        console.log("b:", b);
+      }
+      {
+        let { floor, pow } = Math;
+        let a = 1.1;
+        console.log("floor(a):", floor(a));
+      }
+      {
+        let { length } = "yo.";
+        console.log(length);
+      }
+      {
+        let [a, b, c] = "yo.";
+        console.log(a, b, c);
+      }
+      {
+        let arr = [1, 2];
+        function test([a, b]) {
+          console.log(a, b);
+        }
+        test(arr);
+      }
+      {
+        let obj = { a: 3, b: 4 };
+        function test({ a, b }) {
+          console.log(a, b);
+        }
+        test(obj);
+      }
+      {
+        let obj = { b: 4 };
+        function test({ a = 10, b }) {
+          console.log(a, b);
+        }
+        test(obj);
+      }
+    </script>
+  </body>
+</html>
